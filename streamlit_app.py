@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 # create a title for the app, center the title
-st.markdown("<h1 style='text-align: center; color: red;'>Some title</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: red;'>Some title</h1>")
 
 # first open UAR-v1.0xlsx using pandas
 # then create a dataframe with the data
