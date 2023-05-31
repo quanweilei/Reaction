@@ -6,6 +6,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import pip
+pip.main(["install", "openpyxl"])
 
 # create style to center align the title
 style = "<style> h1 { text-align: center; color: #000000; } </style>"
