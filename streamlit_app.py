@@ -45,8 +45,6 @@ productA_U = df['product A'].unique()
 productB_U = df['product B'].unique()
 
 # add a blank option to the beginning of each list
-dE_U = np.insert(dE_U, 0, None)
-act_U = np.insert(act_U, 0, None)
 metal_U = np.insert(metal_U, 0, None)
 surface_U = np.insert(surface_U, 0, None)
 reactants_U = np.insert(reactants_U, 0, None)
@@ -54,11 +52,9 @@ reagentB_U = np.insert(reagentB_U, 0, None)
 productA_U = np.insert(productA_U, 0, None)
 productB_U = np.insert(productB_U, 0, None)
 
-
-
 # create selection box for 'delta E [eV]', 'activation barrier [eV]', 'metal', 'surface', 'reactants', 'reagent B', 'product A', 'product B'
-dE = st.selectbox('delta E [eV]', dE_U)
-act = st.selectbox('activation barrier [eV]', act_U)
+dE = st.slider("delta E [eV]", min(dE_U), max(dE_U), value = (float(min(dE_U)), float(max(dE_U))), step=0.01)
+act = st.slider("activation barrier [eV]", min(act_U), max(act_U), value = (float(min(act_U)), float(max(act_U))), step=0.01)
 metal = st.selectbox('metal', metal_U)
 surface = st.selectbox('surface', surface_U)
 reactants = st.selectbox('reactants', reactants_U)
@@ -75,10 +71,10 @@ if pressed:
     df_display = df.copy()
 
     # if a column is None, then select all
-    if pd.isna(dE) == False:
-        df_display = df_display[df_display['delta E [eV]'] == dE]
-    if pd.isna(act) == False:
-        df_display = df_display[df_display['activation barrier [eV]'] == act]
+    # for dE search take in dE, a double tuple and search for all values that are between (inclusive)
+    df_display = df_display[(df_display['delta E [eV]'] >= dE[0]) & (df_display['delta E [eV]'] <= dE[1])]
+    df_display = df_display[(df_display['activation barrier [eV]'] >= act[0]) & (df_display['activation barrier [eV]'] <= act[1])]
+
     if pd.isna(metal) == False:
         df_display = df_display[df_display['metal'] == metal]
     if pd.isna(surface) == False:
@@ -91,5 +87,5 @@ if pressed:
         df_display = df_display[df_display['product A'] == productA]
     if pd.isna(productB) == False:
         df_display = df_display[df_display['product B'] == productB]
-
+    print(df_display)
     st.write(df_display)
