@@ -8,19 +8,13 @@ import pandas as pd
 import numpy as np
 import pip
 pip.main(["install", "openpyxl"])
+st.set_page_config(layout="centered", page_title = "UAR Database", page_icon = "https://cdn.uadigital.arizona.edu/logos/v1.0.0/ua_wordmark_line_logo_white_rgb.min.svg")
+html_string = '<head><link rel="stylesheet" href="https://cdn.digital.arizona.edu/lib/arizona-bootstrap/2.0.23/css/arizona-bootstrap.min.css" crossorigin="anonymous"><head>'
 
-# create style to center align the title
-style = "<style> h1 { text-align: center; color: #000000; } </style>"
-st.markdown(style, unsafe_allow_html=True)
+st.markdown(html_string, unsafe_allow_html=True)
 
-# create style to center align the text
-style = "<style> div { text-align: center; color: #000000; } </style>"
-st.markdown(style, unsafe_allow_html=True)
-
-
-# create a title for the app, center the title
-st.title('U of A Reaction Database')
-st.text('This is a streamlit app for University of Arizona Reaction Database')
+top = '<body> <header id="region_header_ua" class="l-arizona-header bg-red"> <section class="container l-container"> <div class="row"> <a href="http://www.arizona.edu" title="The University of Arizona homepage" class="arizona-logo"> <img alt="The University of Arizona Wordmark Line Logo White" src="https://cdn.uadigital.arizona.edu/logos/v1.0.0/ua_wordmark_line_logo_white_rgb.min.svg" class="arizona-line-logo"> </a> </div> </section> </header></body>'
+st.markdown(top, unsafe_allow_html=True)
 
 # first open UAR-v1.0xlsx using pandas
 # then create a dataframe with the data
@@ -33,7 +27,6 @@ df.rename(columns={'Unnamed: 4': 'reactants'}, inplace=True)
 # print list of column names
 cols = df.columns.tolist()
 print(cols)
-
 # get the unique values for each column
 dE_U = df['delta E [eV]'].unique()
 act_U = df['activation barrier [eV]'].unique()
