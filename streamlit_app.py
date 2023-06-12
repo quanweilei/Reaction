@@ -45,15 +45,22 @@ reagentB_U = np.insert(reagentB_U, 0, None)
 productA_U = np.insert(productA_U, 0, None)
 productB_U = np.insert(productB_U, 0, None)
 
+# create left and right column
+left, right = st.columns(2)
+with left:
+    reactants = st.selectbox('Reactant A', reactants_U)
+    productA = st.selectbox('Product A', productA_U)
+    metal = st.selectbox('Metal', metal_U)
+with right:
+    reagentB = st.selectbox('Reactant B', reagentB_U)
+    productB = st.selectbox('Product B', productB_U)
+    surface = st.selectbox('Facet', surface_U)
+
 # create selection box for 'delta E [eV]', 'activation barrier [eV]', 'metal', 'surface', 'reactants', 'reagent B', 'product A', 'product B'
-dE = st.slider("delta E [eV]", min(dE_U), max(dE_U), value = (float(min(dE_U)), float(max(dE_U))), step=0.01)
-act = st.slider("activation barrier [eV]", min(act_U), max(act_U), value = (float(min(act_U)), float(max(act_U))), step=0.01)
-metal = st.selectbox('metal', metal_U)
-surface = st.selectbox('surface', surface_U)
-reactants = st.selectbox('reactants', reactants_U)
-reagentB = st.selectbox('reagent B', reagentB_U)
-productA = st.selectbox('product A', productA_U)
-productB = st.selectbox('product B', productB_U)
+dE = st.slider("Reaction Energy", min(dE_U), max(dE_U), value = (float(min(dE_U)), float(max(dE_U))), step=0.01)
+act = st.slider("Activation Energy", min(act_U), max(act_U), value = (float(min(act_U)), float(max(act_U))), step=0.01)
+
+
 
 pressed = st.button('Search')
 
