@@ -18,7 +18,12 @@ st.markdown(top, unsafe_allow_html=True)
 st.divider()
 # first open UAR-v1.0xlsx using pandas
 # then create a dataframe with the data
-df = pd.read_excel('UAR-v1.0.xlsx')
+@st.cache_data
+def loadDF():
+    df = pd.read_excel('UAR-v1.0.xlsx')
+    return df
+
+df = loadDF()
 df['surface'] = df['surface'].astype(str)
 
 # rename column that has no name to 'reactants'
@@ -64,10 +69,8 @@ act = st.slider("Activation Energy", min(act_U), max(act_U), value = (float(min(
 
 pressed = st.button('Search')
 
-if pressed:
-    print("The button was pressed!")
-    # parse df with the selections
-    # if selection is none, then select all
+@st.cache_data
+def updatedVals(reactants, productA, metal, surface, reagentB, productB, dE, act):
     df_display = df.copy()
 
     # if a column is None, then select all
@@ -87,5 +90,9 @@ if pressed:
         df_display = df_display[df_display['product A'] == productA]
     if pd.isna(productB) == False:
         df_display = df_display[df_display['product B'] == productB]
+    return df_display
+
+if pressed:
+    df_display = updatedVals(reactants, productA, metal, surface, reagentB, productB, dE, act)
     print(df_display)
     st.write(df_display)
