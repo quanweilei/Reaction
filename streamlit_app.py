@@ -18,9 +18,10 @@ st.markdown(top, unsafe_allow_html=True)
 st.divider()
 # first open UAR-v1.0xlsx using pandas
 # then create a dataframe with the data
-@st.cache_data
+@st.cache_resource
 def loadDF():
     df = pd.read_excel('UAR-v1.0.xlsx')
+    # get the unique values for each column
     return df
 
 df = loadDF()
@@ -69,7 +70,7 @@ act = st.slider("Activation Energy", min(act_U), max(act_U), value = (float(min(
 
 pressed = st.button('Search')
 
-@st.cache_data
+@st.cache_resource
 def updatedVals(reactants, productA, metal, surface, reagentB, productB, dE, act):
     df_display = df.copy()
 
@@ -95,4 +96,4 @@ def updatedVals(reactants, productA, metal, surface, reagentB, productB, dE, act
 if pressed:
     df_display = updatedVals(reactants, productA, metal, surface, reagentB, productB, dE, act)
     print(df_display)
-    st.write(df_display)
+    st.dataframe(df_display)
