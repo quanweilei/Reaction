@@ -15,7 +15,7 @@ st.markdown(html_string, unsafe_allow_html=True)
 
 top = '<body> <header id="region_header_ua" class="l-arizona-header bg-red"> <section class="container l-container"> <div class="row"> <a href="http://www.arizona.edu" title="The University of Arizona homepage" class="arizona-logo"> <img alt="The University of Arizona Wordmark Line Logo White" src="https://cdn.uadigital.arizona.edu/logos/v1.0.0/ua_wordmark_line_logo_white_rgb.min.svg" class="arizona-line-logo"> </a> </div> </section> </header></body>'
 st.markdown(top, unsafe_allow_html=True)
-
+st.divider()
 # first open UAR-v1.0xlsx using pandas
 # then create a dataframe with the data
 df = pd.read_excel('UAR-v1.0.xlsx')
