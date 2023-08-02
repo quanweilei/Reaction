@@ -7,8 +7,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-import subprocess
-
 # Streamlit config, must be called as the first line of code
 st.set_page_config(layout="centered", page_title = "UAR Database", page_icon = "https://cdn.uadigital.arizona.edu/logos/v1.0.0/ua_wordmark_line_logo_white_rgb.min.svg")
 
