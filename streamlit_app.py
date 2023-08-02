@@ -17,9 +17,7 @@ def install_openpyxl():
     try:
         import openpyxl
     except ImportError:
-        st.warning("Installing 'openpyxl' library. Please wait...")
-        subprocess.check_call(["pip", "install", "openpyxl"])
-        st.success("'openpyxl' library has been installed!")
+        subprocess.check_call(["pip", "install", "pandas", "openpyxl"])
 
 # Call the function to check and install 'openpyxl' if needed
 install_openpyxl()
