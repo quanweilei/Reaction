@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import pip
 
-pip.main(["install", "openpyxl"])
+
 
 st.set_page_config(layout="centered", page_title = "UAR Database", page_icon = "https://cdn.uadigital.arizona.edu/logos/v1.0.0/ua_wordmark_line_logo_white_rgb.min.svg")
 html_string = '<head><link rel="stylesheet" href="https://cdn.digital.arizona.edu/lib/arizona-bootstrap/2.0.23/css/arizona-bootstrap.min.css" crossorigin="anonymous"><head>'
