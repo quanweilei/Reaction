@@ -6,9 +6,21 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pip
 
-pip.main(["install", "openpyxl"])
+import subprocess
+
+# Function to install 'openpyxl' if not already installed
+def install_openpyxl():
+    try:
+        import openpyxl
+    except ImportError:
+        st.warning("Installing 'openpyxl' library. Please wait...")
+        subprocess.check_call(["pip", "install", "openpyxl"])
+        st.success("'openpyxl' library has been installed!")
+
+# Call the function to check and install 'openpyxl' if needed
+install_openpyxl()
+print("openpyxl installed")
 
 st.set_page_config(layout="centered", page_title = "UAR Database", page_icon = "https://cdn.uadigital.arizona.edu/logos/v1.0.0/ua_wordmark_line_logo_white_rgb.min.svg")
 html_string = '<head><link rel="stylesheet" href="https://cdn.digital.arizona.edu/lib/arizona-bootstrap/2.0.23/css/arizona-bootstrap.min.css" crossorigin="anonymous"><head>'
