@@ -9,6 +9,9 @@ import numpy as np
 
 import subprocess
 
+# Streamlit config, must be called as the first line of code
+st.set_page_config(layout="centered", page_title = "UAR Database", page_icon = "https://cdn.uadigital.arizona.edu/logos/v1.0.0/ua_wordmark_line_logo_white_rgb.min.svg")
+
 # Function to install 'openpyxl' if not already installed
 def install_openpyxl():
     try:
@@ -22,7 +25,6 @@ def install_openpyxl():
 install_openpyxl()
 print("openpyxl installed")
 
-st.set_page_config(layout="centered", page_title = "UAR Database", page_icon = "https://cdn.uadigital.arizona.edu/logos/v1.0.0/ua_wordmark_line_logo_white_rgb.min.svg")
 html_string = '<head><link rel="stylesheet" href="https://cdn.digital.arizona.edu/lib/arizona-bootstrap/2.0.23/css/arizona-bootstrap.min.css" crossorigin="anonymous"><head>'
 
 st.markdown(html_string, unsafe_allow_html=True)
