@@ -21,7 +21,7 @@ st.divider()
 # then create a dataframe with the data
 @st.cache_resource
 def loadDF():
-    df = pd.read_excel('test.xlsx')
+    df = pd.read_excel('UAR-v1.0.xlsx')
     # get the unique values for each column
     return df
 
