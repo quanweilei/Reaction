@@ -21,7 +21,7 @@ st.divider()
 # then create a dataframe with the data
 @st.cache_resource
 def loadDF():
-    df = pd.read_excel('UAR-v1.0.xlsx')
+    df = pd.read_excel('test.xlsx')
     # get the unique values for each column
     return df
 
@@ -98,3 +98,10 @@ if pressed:
     df_display = updatedVals(reactants, productA, metal, surface, reagentB, productB, dE, act)
     print(df_display)
     st.dataframe(df_display)
+    download = st.download_button(
+        "Download Data", 
+        df_display.to_csv(), 
+        "reaction.csv",
+        "text/csv")
+
+
