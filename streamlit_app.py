@@ -14,7 +14,19 @@ html_string = '<head><link rel="stylesheet" href="https://cdn.digital.arizona.ed
 
 st.markdown(html_string, unsafe_allow_html=True)
 
-top = '<body> <header id="region_header_ua" class="l-arizona-header bg-red"> <section class="container l-container"> <div class="row"> <a href="http://www.arizona.edu" title="The University of Arizona homepage" class="arizona-logo"> <img alt="The University of Arizona Wordmark Line Logo White" src="https://cdn.uadigital.arizona.edu/logos/v1.0.0/ua_wordmark_line_logo_white_rgb.min.svg" class="arizona-line-logo"> </a> </div> </section> </header></body>'
+st.markdown("""
+<style>
+.arizona-logo {
+    font-size:30px;
+    font-weight: 400; 
+    color: white;
+    font-family: "Proxima Nova";
+    text-decoration: none;
+}
+</style>
+""", unsafe_allow_html=True)
+
+top = '<body> <header id="region_header_ua" class="l-arizona-header bg-red"> <section class="container l-container"> <div class="row"> <a href="http://www.arizona.edu" title="The University of Arizona homepage" class="arizona-logo"> University of Arizona Reaction Database</a> </div> </section> </header></body>'
 st.markdown(top, unsafe_allow_html=True)
 st.divider()
 # first open UAR-v1.0xlsx using pandas
@@ -43,6 +55,9 @@ reactants_U = df['reactants'].unique()
 reagentB_U = df['reagent B'].unique()
 productA_U = df['product A'].unique()
 productB_U = df['product B'].unique()
+code_U = df['code'].unique()
+func_U = df['functional'].unique()
+energy_U = df['E/H'].unique()
 
 # add a blank option to the beginning of each list
 metal_U = np.insert(metal_U, 0, None)
@@ -51,6 +66,9 @@ reactants_U = np.insert(reactants_U, 0, None)
 reagentB_U = np.insert(reagentB_U, 0, None)
 productA_U = np.insert(productA_U, 0, None)
 productB_U = np.insert(productB_U, 0, None)
+code_U = np.insert(code_U, 0, None)
+func_U = np.insert(func_U, 0, None)
+energy_U = np.insert(energy_U, 0, None)
 
 # create left and right column
 left, right = st.columns(2)
@@ -63,16 +81,28 @@ with right:
     productB = st.selectbox('Product B', productB_U)
     surface = st.selectbox('Facet', surface_U)
 
+# create left, middle, right column, for functional, energy, and code
+# create selection box for 'functional', 'E/H', 'code'
+left, middle, right = st.columns(3)
+with left:
+    functional = st.selectbox('Functional', func_U)
+
+with right:
+    energy = st.selectbox('Energy', energy_U)
+
+left, middle, right = st.columns(3)
+
+with middle:
+    codes = st.selectbox('Code', code_U)
+
 # create selection box for 'delta E [eV]', 'activation barrier [eV]', 'metal', 'surface', 'reactants', 'reagent B', 'product A', 'product B'
 dE = st.slider("Reaction Energy", min(dE_U), max(dE_U), value = (float(min(dE_U)), float(max(dE_U))), step=0.01)
 act = st.slider("Activation Energy", min(act_U), max(act_U), value = (float(min(act_U)), float(max(act_U))), step=0.01)
 
-
-
 pressed = st.button('Search')
 
 @st.cache_resource
-def updatedVals(reactants, productA, metal, surface, reagentB, productB, dE, act):
+def updatedVals(reactants, productA, metal, surface, reagentB, productB, dE, act, functional, energy, codes):
     df_display = df.copy()
 
     # if a column is None, then select all
@@ -92,10 +122,16 @@ def updatedVals(reactants, productA, metal, surface, reagentB, productB, dE, act
         df_display = df_display[df_display['product A'] == productA]
     if pd.isna(productB) == False:
         df_display = df_display[df_display['product B'] == productB]
+    if pd.isna(functional) == False:
+        df_display = df_display[df_display['functional'] == functional]
+    if pd.isna(energy) == False:
+        df_display = df_display[df_display['E/H'] == energy]
+    if pd.isna(codes) == False:
+        df_display = df_display[df_display['code'] == codes]
     return df_display
 
 if pressed:
-    df_display = updatedVals(reactants, productA, metal, surface, reagentB, productB, dE, act)
+    df_display = updatedVals(reactants, productA, metal, surface, reagentB, productB, dE, act, functional, energy, codes)
     print(df_display)
     st.dataframe(df_display)
     download = st.download_button(
