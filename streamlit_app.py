@@ -26,7 +26,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-top = '<body> <header id="region_header_ua" class="l-arizona-header bg-red"> <section class="container l-container"> <div class="row"> <a href="http://www.arizona.edu" title="The University of Arizona homepage" class="arizona-logo"> University of Arizona Reaction Database</a> </div> </section> </header></body>'
+top = '<body> <header id="region_header_ua" class="l-arizona-header bg-red"> <section class="container l-container"> <div class="row"> <a href="http://www.arizona.edu" title="The University of Arizona homepage" class="arizona-logo">   University of Arizona Reaction Database</a> </div> </section> </header></body>'
 st.markdown(top, unsafe_allow_html=True)
 st.divider()
 # first open UAR-v1.0xlsx using pandas
